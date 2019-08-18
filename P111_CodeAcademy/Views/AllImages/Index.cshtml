@@ -1,0 +1,59 @@
+﻿
+<!--Biz Mkodel papkasinin icindeki Images.cs -de Rezor vasitesi ile modeli using etmedik.
+    images.cs bir C3 muhitidir. ozu avtomatik lampicka ile usuin eliyir.
+    Ancaq index.cshtml ise bir html muhitidir.
+    Burda ionu usin elemek ucun ERezor vasitesi ile using elidik.-->
+@model StudentImage
+<!---Modelin tipini tanitdiririq
+    model ozu Generic tip-dir. Yeni List<Image> tipindendir. Bir Collectiondir
+    Yeni Numerable- sayila bilendir. Biz onun tipini downcasting eliyirik
+    neye? INumerable interface-ne cunki ondan miras lir. Babasidir.--->
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container">
+
+        <div class="row mt-1">
+            <h2> @ViewBag.Model </h2>
+        </div>
+
+        <div class="row mt-5">
+            @foreach (var image in Model.MyImages)// @model  IEnumerable<Image>-Buna gore Model yazdiq
+            {
+                <div class="col-3 mt-5">
+                    <a href="/AllImages/image/@image.Id">
+                        <img src="~/img/cards_img/@image.Link" class="img-thumbnail" />
+                    </a>
+                </div>
+            }
+
+        </div>
+
+
+        <!--Biz isteyirik ki, her bir seklin ustune tikladikda Google-deki kimi yeni bir pencerede sekil polnu plan acilsin.-->
+        <!--Bunun ucun fayl gondermeliyik.ve buniun ucun bir action yazmaga mecburuq.-->
+        <!--actioni biz indexsin mensub oldigu classda yzzacayiq.Cunki retun fayl View -a olacaq-->
+
+
+
+        <div class="row mt-2">
+            <ul>
+                @foreach (var student in Model.Students)
+                {
+                    <li>@student</li>
+                }
+            </ul>
+        </div>
+
+        <div class="row mt-2">
+            <ul>
+                @foreach (var number in Model.Numbers)
+                {
+                    <li>@number</li>
+
+                }
+            </ul>
+        </div>
+    </div>
